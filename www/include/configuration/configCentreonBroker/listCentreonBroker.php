@@ -174,14 +174,14 @@ for ($i = 0; $config = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure($config["config_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($config["config_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&id=" . $config['config_id'],
         "RowMenu_desc" => CentreonUtils::escapeSecure(
             substr(
                 $nagios_servers[$config["ns_nagios_server"]],
                 0,
                 40
-            )
+            ), CentreonUtils::ESCAPE_ALL
         ),
         "RowMenu_inputs" => $inputNumber,
         "RowMenu_outputs" => $outputNumber,

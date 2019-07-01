@@ -204,9 +204,9 @@ for ($i = 0; $service = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_desc" => CentreonUtils::escapeSecure($service["service_description"]),
-        "RowMenu_alias" => CentreonUtils::escapeSecure($service["service_alias"]),
-        "RowMenu_parent" => CentreonUtils::escapeSecure($tplStr),
+        "RowMenu_desc" => CentreonUtils::escapeSecure($service["service_description"], CentreonUtils::ESCAPE_ALL),
+        "RowMenu_alias" => CentreonUtils::escapeSecure($service["service_alias"], CentreonUtils::ESCAPE_ALL),
+        "RowMenu_parent" => CentreonUtils::escapeSecure($tplStr, CentreonUtils::ESCAPE_ALL),
         "RowMenu_icon" => $svc_icon,
         "RowMenu_retry" => CentreonUtils::escapeSecure(
             "$normal_check_interval $normal_units / $retry_check_interval $retry_units"

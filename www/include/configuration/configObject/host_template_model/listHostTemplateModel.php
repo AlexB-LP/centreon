@@ -175,9 +175,9 @@ for ($i = 0; $host = $DBRESULT->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure($host["host_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($host["host_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&host_id=" . $host['host_id'],
-        "RowMenu_desc" => CentreonUtils::escapeSecure($host["host_alias"]),
+        "RowMenu_desc" => CentreonUtils::escapeSecure($host["host_alias"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_icone" => $host_icone,
         "RowMenu_svChilds" => count($svArr),
         "RowMenu_parent" => CentreonUtils::escapeSecure($tplStr),

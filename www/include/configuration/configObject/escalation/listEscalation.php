@@ -154,8 +154,8 @@ for ($i = 0; $esc = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure(myDecode($esc["esc_name"])),
-        "RowMenu_alias" => CentreonUtils::escapeSecure(myDecode($esc["esc_alias"])),
+        "RowMenu_name" => CentreonUtils::escapeSecure(myDecode($esc["esc_name"]), CentreonUtils::ESCAPE_ALL),
+        "RowMenu_alias" => CentreonUtils::escapeSecure(myDecode($esc["esc_alias"]), CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&esc_id=" . $esc['esc_id'],
         "RowMenu_options" => $moptions
     );

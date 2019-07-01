@@ -111,9 +111,9 @@ for ($i = 0; $sg = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure($sg["sg_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($sg["sg_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&sg_id=" . $sg['sg_id'],
-        "RowMenu_desc" => CentreonUtils::escapeSecure($sg["sg_alias"]),
+        "RowMenu_desc" => CentreonUtils::escapeSecure($sg["sg_alias"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_status" => $sg["sg_activate"] ? _("Enabled") : _("Disabled"),
         "RowMenu_badge" => $sg["sg_activate"] ? "service_ok" : "service_critical",
         "RowMenu_options" => $moptions

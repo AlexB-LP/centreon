@@ -155,9 +155,9 @@ for ($i = 0; $hc = $DBRESULT->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure($hc["hc_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($hc["hc_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&hc_id=" . $hc['hc_id'],
-        "RowMenu_desc" => CentreonUtils::escapeSecure($hc["hc_alias"]),
+        "RowMenu_desc" => CentreonUtils::escapeSecure($hc["hc_alias"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_hc_type" => ($hc["level"] ? _('Severity') . ' (' . $hc['level'] . ')' : _('Regular')),
         "RowMenu_status" => $hc["hc_activate"] ? _("Enabled") : _("Disabled"),
         "RowMenu_badge" => $hc["hc_activate"] ? "service_ok" : "service_critical",

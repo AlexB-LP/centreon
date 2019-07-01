@@ -99,9 +99,9 @@ for ($i = 0; $mnftr = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure(myDecode($mnftr["name"])),
+        "RowMenu_name" => CentreonUtils::escapeSecure($mnftr["name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&id=" . $mnftr['id'],
-        "RowMenu_alias" => CentreonUtils::escapeSecure(myDecode($mnftr["alias"])),
+        "RowMenu_alias" => CentreonUtils::escapeSecure($mnftr["alias"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_options" => $moptions
     );
     $style != "two" ? $style = "two" : $style = "one";

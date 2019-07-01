@@ -137,9 +137,9 @@ for ($i = 0; $sc = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "sc_name" => htmlentities($sc["sc_name"], ENT_QUOTES, "UTF-8"),
+        "sc_name" => CentreonUtils::escapeSecure($sc["sc_name"], CentreonUtils::ESCAPE_ALL),
         "sc_link" => "main.php?p=" . $p . "&o=c&sc_id=" . $sc['sc_id'],
-        "sc_description" => htmlentities($sc["sc_description"], ENT_QUOTES, "UTF-8"),
+        "sc_description" => CentreonUtils::escapeSecure($sc["sc_description"], CentreonUtils::ESCAPE_ALL),
         "svc_linked" => $nb_svc["COUNT(*)"],
         "sc_type" => ($sc['level'] ? _('Severity') . ' (' . $sc['level'] . ')' : _('Regular')),
         "sc_activated" => $sc["sc_activate"] ? _("Enabled") : _("Disabled"),

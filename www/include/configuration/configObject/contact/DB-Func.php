@@ -266,7 +266,7 @@ function multipleContactInDB($contacts = array(), $nbrDup = array())
                     $fields["contact_aclRelation"] = "";
                     while ($aclRelation = $dbResult->fetch()) {
                         $query = "INSERT INTO acl_group_contacts_relations VALUES ('" .
-                            $lastId . "', '" . $aclRelation["acl_group_id"] . "')";
+                            (int)$lastId . "', '" . (int)$aclRelation["acl_group_id"] . "')";
                         $pearDB->query($query);
                         $fields["contact_aclRelation"] .= $aclRelation["acl_group_id"] . ",";
                     }
@@ -281,7 +281,7 @@ function multipleContactInDB($contacts = array(), $nbrDup = array())
                     $fields["contact_hostNotifCmds"] = "";
                     while ($hostCmd = $dbResult->fetch()) {
                         $query = "INSERT INTO contact_hostcommands_relation VALUES ('" .
-                            $lastId . "', '" . $hostCmd["command_command_id"] . "')";
+                            (int)$lastId . "', '" . (int)$hostCmd["command_command_id"] . "')";
                         $pearDB->query($query);
                         $fields["contact_hostNotifCmds"] .= $hostCmd["command_command_id"] . ",";
                     }
@@ -296,7 +296,7 @@ function multipleContactInDB($contacts = array(), $nbrDup = array())
                     $fields["contact_svNotifCmds"] = "";
                     while ($serviceCmd = $dbResult->fetch()) {
                         $query = "INSERT INTO contact_servicecommands_relation VALUES ('" .
-                            $lastId . "', '" . $serviceCmd["command_command_id"] . "')";
+                            (int)$lastId . "', '" . (int)$serviceCmd["command_command_id"] . "')";
                         $pearDB->query($query);
                         $fields["contact_svNotifCmds"] .= $serviceCmd["command_command_id"] . ",";
                     }
@@ -311,7 +311,7 @@ function multipleContactInDB($contacts = array(), $nbrDup = array())
                     $fields["contact_cgNotif"] = "";
                     while ($Cg = $dbResult->fetch()) {
                         $query = "INSERT INTO contactgroup_contact_relation VALUES ('" .
-                            $lastId . "', '" . $Cg["contactgroup_cg_id"] . "')";
+                            (int)$lastId . "', '" . (int)$Cg["contactgroup_cg_id"] . "')";
                         $pearDB->query($query);
                         $fields["contact_cgNotif"] .= $Cg["contactgroup_cg_id"] . ",";
                     }
@@ -436,16 +436,16 @@ function insertContact($ret = array())
         "VALUES ( ";
     $rq .= "NULL, ";
     isset($ret["timeperiod_tp_id"]) && $ret["timeperiod_tp_id"] != null
-        ? $rq .= "'" . $ret["timeperiod_tp_id"] . "', "
+        ? $rq .= "'" . (int)$ret["timeperiod_tp_id"] . "', "
         : $rq .= "NULL, ";
     isset($ret["timeperiod_tp_id2"]) && $ret["timeperiod_tp_id2"] != null
-        ? $rq .= "'" . $ret["timeperiod_tp_id2"] . "', "
+        ? $rq .= "'" . (int)$ret["timeperiod_tp_id2"] . "', "
         : $rq .= "NULL, ";
     isset($ret["contact_name"]) && $ret["contact_name"] != null
-        ? $rq .= "'" . $ret["contact_name"] . "', "
+        ? $rq .= "'" . $pearDB->escape($ret["contact_name"]) . "', "
         : $rq .= "NULL, ";
     isset($ret["contact_alias"]) && $ret["contact_alias"] != null
-        ? $rq .= "'" . $ret["contact_alias"] . "', "
+        ? $rq .= "'" . $pearDB->escape($ret["contact_alias"]) . "', "
         : $rq .= "NULL, ";
     isset($ret["contact_autologin_key"]) && $ret["contact_autologin_key"] != null
         ? $rq .= "'" . htmlentities($ret["contact_autologin_key"], ENT_QUOTES) . "', "
@@ -510,16 +510,16 @@ function insertContact($ret = array())
         ? $rq .= "'" . $ret["contact_admin"]["contact_admin"] . "', "
         : $rq .= "'0', ";
     isset($ret["contact_type_msg"]) && $ret["contact_type_msg"] != null
-        ? $rq .= "'" . $ret["contact_type_msg"] . "', "
+        ? $rq .= "'" . $pearDB->escape($ret["contact_type_msg"]) . "', "
         : $rq .= "NULL, ";
     isset($ret["contact_activate"]["contact_activate"]) && $ret["contact_activate"]["contact_activate"] != null
         ? $rq .= "'" . $ret["contact_activate"]["contact_activate"] . "', "
         : $rq .= "NULL, ";
     isset($ret["contact_auth_type"]) && $ret["contact_auth_type"] != null
-        ? $rq .= "'" . $ret["contact_auth_type"] . "', "
+        ? $rq .= "'" . $pearDB->escape($ret["contact_auth_type"]) . "', "
         : $rq .= "'local', ";
     isset($ret["contact_ldap_dn"]) && $ret["contact_ldap_dn"] != null
-        ? $rq .= "'" . $pearDB->escape($ret["contact_ldap_dn"], false) . "', "
+        ? $rq .= "'" . $pearDB->escape($ret["contact_ldap_dn"]) . "', "
         : $rq .= "NULL, ";
     isset($ret["contact_location"]) && $ret["contact_location"] != null
         ? $rq .= "'" . $ret["contact_location"] . "', "
