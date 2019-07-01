@@ -490,8 +490,8 @@ function divideHostsToHost($service_id)
             array($relation["hostgroup_hg_id"] => null)
         );
 
-        $query = "UPDATE index_data SET service_id = '" . $sv_id . "' WHERE host_id = '" .
-            $relation["host_host_id"] . "' AND service_id = '" . $service_id . "'";
+        $query = "UPDATE index_data SET service_id = " . (int)$sv_id . " WHERE host_id = " .
+            (int)$relation["host_host_id"] . " AND service_id = " . (int)$service_id;
         $pearDBO->query($query);
         setHostChangeFlag($pearDB, $relation["host_host_id"], null);
     }

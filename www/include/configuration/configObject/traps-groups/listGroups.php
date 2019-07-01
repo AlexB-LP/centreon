@@ -98,7 +98,7 @@ for ($i = 0; $group = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => myDecode($group["traps_group_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($group["traps_group_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&id=" . $group['traps_group_id'],
         "RowMenu_options" => $moptions
     );

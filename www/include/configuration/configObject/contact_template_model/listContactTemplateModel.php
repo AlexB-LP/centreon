@@ -166,16 +166,12 @@ foreach ($contacts as $contact) {
     $elemArr[] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => html_entity_decode($contact["contact_name"], ENT_QUOTES, "UTF-8"),
+        "RowMenu_name" => CentreonUtils::escapeSecure($contact["contact_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_ico" => isset($contactTypeIcone[$contact_type]) ? $contactTypeIcone[$contact_type] : "",
         "RowMenu_ico_title" => _('This is a contact template.'),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&contact_id=" . $contact['contact_id'],
         "RowMenu_desc" => CentreonUtils::escapeSecure(
-            html_entity_decode(
-                $contact["contact_alias"],
-                ENT_QUOTES,
-                "UTF-8"
-            )
+                $contact["contact_alias"], CentreonUtils::ESCAPE_ALL
         ),
         "RowMenu_hostNotif" => html_entity_decode($tpCache[(isset($contact["timeperiod_tp_id"])
                 ? $contact["timeperiod_tp_id"] : "")], ENT_QUOTES, "UTF-8") . " (" .

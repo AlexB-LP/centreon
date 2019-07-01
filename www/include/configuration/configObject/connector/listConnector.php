@@ -137,8 +137,10 @@ try {
             $elemArr[$j] = array(
                 "RowMenu_select" => $selectedElements->toHtml(),
                 "RowMenu_link" => "main.php?p=" . $p . "&o=c&id=" . $result['id'],
-                "RowMenu_name" => CentreonUtils::escapeSecure($result["name"]),
-                "RowMenu_description" => CentreonUtils::escapeSecure($result['description']),
+                "RowMenu_name" => CentreonUtils::escapeSecure($result["name"], CentreonUtils::ESCAPE_ALL),
+                "RowMenu_description" => CentreonUtils::escapeSecure(
+                    $result['description'], CentreonUtils::ESCAPE_ALL
+                ),
                 "RowMenu_command_line" => CentreonUtils::escapeSecure($result['command_line']),
                 "RowMenu_enabled" => $result['enabled'] ? _("Enabled") : _("Disabled"),
                 "RowMenu_badge" => $result['enabled'] ? "service_ok" : "service_critical",
