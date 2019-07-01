@@ -117,9 +117,12 @@ for ($i = 0; $trap = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => $trap["traps_name"],
+        "RowMenu_name" => CentreonUtils::escapeSecure($trap["traps_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "?p=$p&o=c&traps_id={$trap['traps_id']}",
-        "RowMenu_desc" => substr($trap["traps_oid"], 0, 40),
+        "RowMenu_desc" => substr(
+                CentreonUtils::escapeSecure($trap["traps_oid"], CentreonUtils::ESCAPE_ALL)
+                , 0, 40
+        ),
         "RowMenu_status" => isset($tabStatus[$trap["traps_status"]])
             ? $tabStatus[$trap["traps_status"]]
             : $tabStatus[3],

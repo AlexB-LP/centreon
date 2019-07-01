@@ -132,9 +132,9 @@ foreach ($cgs as $cg) {
     $elemArr[] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => $cg["cg_name"],
+        "RowMenu_name" => CentreonUtils::escapeSecure($cg["cg_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&cg_id=" . $cg['cg_id'],
-        "RowMenu_desc" => $cg["cg_alias"],
+        "RowMenu_desc" => CentreonUtils::escapeSecure($cg["cg_alias"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_contacts" => $ctNbr["nbr"],
         "RowMenu_status" => $cg["cg_activate"] ? _("Enabled") : _("Disabled"),
         "RowMenu_badge" => $cg["cg_activate"] ? "service_ok" : "service_critical",

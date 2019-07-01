@@ -146,7 +146,7 @@ for ($i = 0; $ms = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure($ms["meta_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($ms["meta_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&meta_id=" . $ms['meta_id'],
         "RowMenu_type" => CentreonUtils::escapeSecure($calcType[$ms["calcul_type"]]),
         "RowMenu_levelw" => isset($ms["warning"]) && $ms["warning"] ? $ms["warning"] : "-",

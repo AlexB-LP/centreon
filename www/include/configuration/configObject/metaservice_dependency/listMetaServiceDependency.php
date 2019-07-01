@@ -112,9 +112,9 @@ for ($i = 0; $dep = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure($dep["dep_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($dep["dep_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&dep_id=" . $dep['dep_id'],
-        "RowMenu_description" => CentreonUtils::escapeSecure($dep["dep_description"]),
+        "RowMenu_description" => CentreonUtils::escapeSecure($dep["dep_description"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_options" => $moptions
     );
     $style != "two" ? $style = "two" : $style = "one";

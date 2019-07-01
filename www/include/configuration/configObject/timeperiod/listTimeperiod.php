@@ -99,9 +99,9 @@ for ($i = 0; $timeperiod = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . $style,
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => $timeperiod["tp_name"],
+        "RowMenu_name" => CentreonUtils::escapeSecure($timeperiod["tp_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_link" => "main.php?p=" . $p . "&o=c&tp_id=" . $timeperiod['tp_id'],
-        "RowMenu_desc" => $timeperiod["tp_alias"],
+        "RowMenu_desc" => CentreonUtils::escapeSecure($timeperiod["tp_alias"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_options" => $moptions,
         "resultingLink" => "main.php?p=" . $p . "&o=s&tp_id=" . $timeperiod['tp_id']
     );

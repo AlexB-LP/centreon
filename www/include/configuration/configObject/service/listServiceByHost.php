@@ -338,16 +338,16 @@ for ($i = 0; $service = $dbResult->fetch(); $i++) {
     $elemArr[$i] = array(
         "MenuClass" => "list_" . ($service["nbr"] > 1 ? "three" : $style),
         "RowMenu_select" => $selectedElements->toHtml(),
-        "RowMenu_name" => CentreonUtils::escapeSecure($service["host_name"]),
+        "RowMenu_name" => CentreonUtils::escapeSecure($service["host_name"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_icone" => $host_icone,
         "RowMenu_sicon" => $svc_icon,
         "RowMenu_link" => "main.php?p=60101&o=c&host_id=" . $service['host_id'],
         "RowMenu_link2" => "main.php?p=" . $p . "&o=c&service_id=" . $service['service_id'],
-        "RowMenu_parent" => CentreonUtils::escapeSecure($tplStr),
+        "RowMenu_parent" => CentreonUtils::escapeSecure($tplStr, CentreonUtils::ESCAPE_ALL),
         "RowMenu_retry" => CentreonUtils::escapeSecure(
             "$normal_check_interval $normal_units / $retry_check_interval $retry_units"
         ),
-        "RowMenu_desc" => CentreonUtils::escapeSecure($service["service_description"]),
+        "RowMenu_desc" => CentreonUtils::escapeSecure($service["service_description"], CentreonUtils::ESCAPE_ALL),
         "RowMenu_status" => $service["service_activate"] ? _("Enabled") : _("Disabled"),
         "RowMenu_badge" => $service["service_activate"] ? "service_ok" : "service_critical",
         "RowMenu_options" => $moptions
