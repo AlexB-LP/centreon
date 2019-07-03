@@ -346,7 +346,7 @@ function deleteHostInDB($hosts = array())
 
 function multipleHostInDB($hosts = array(), $nbrDup = array())
 {
-    global $pearDB, $path, $centreon, $is_admin;
+    global $pearDB, $path, $centreon;
 
     $hostAcl = array();
     foreach ($hosts as $key => $value) {
@@ -358,8 +358,8 @@ function multipleHostInDB($hosts = array(), $nbrDup = array())
             foreach ($row as $key2 => $value2) {
                 $key2 == "host_name" ? ($host_name = $value2 = $value2 . "_" . $i) : null;
                 $val
-                    ? $val .= ($value2 != null ? (", '" . CentreonDB::escape($value2) . "'") : ", NULL")
-                    : $val .= ($value2 != null ? ("'" . CentreonDB::escape($value2) . "'") : "NULL");
+                    ? $val .= ($value2 != null ? (", '" . $pearDB->escape($value2) . "'") : ", NULL")
+                    : $val .= ($value2 != null ? ("'" . $pearDB->escape($value2) . "'") : "NULL");
                 if ($key2 != "host_id") {
                     $fields[$key2] = $value2;
                 }
@@ -369,7 +369,7 @@ function multipleHostInDB($hosts = array(), $nbrDup = array())
             }
             if (hasHostNameNeverUsed($host_name)) {
                 $val ? $rq = "INSERT INTO host VALUES (" . $val . ")" : $rq = null;
-                $dbResult = $pearDB->query($rq);
+                $pearDB->query($rq);
                 $dbResult = $pearDB->query("SELECT MAX(host_id) FROM host");
                 $maxId = $dbResult->fetch();
                 if (isset($maxId["MAX(host_id)"])) {
