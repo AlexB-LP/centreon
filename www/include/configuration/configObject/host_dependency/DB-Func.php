@@ -85,9 +85,11 @@ function deleteHostDependencyInDB($dependencies = array())
     global $pearDB, $centreon;
 
     foreach ($dependencies as $key => $value) {
-        $dbResult2 = $pearDB->query("SELECT dep_name FROM `dependency` WHERE `dep_id` = '" . $key . "' LIMIT 1");
-        $row = $dbResult2->fetch();
-        $dbResult = $pearDB->query("DELETE FROM dependency WHERE dep_id = '" . $key . "'");
+        $dbResult = $pearDB->query("SELECT dep_name FROM `dependency` WHERE `dep_id` = " . (int)$key . " LIMIT 1");
+        $row = $dbResult->fetch();
+        $sth = $pearDB->prepare("DELETE FROM dependency WHERE dep_id = :id");
+        $sth->bindParam(':id', $key, PDO::PARAM_INT);
+        $sth->execute();
         $centreon->CentreonLogAction->insertLog("host dependency", $key, $row['dep_name'], "d");
     }
 }
@@ -104,8 +106,8 @@ function multipleHostDependencyInDB($dependencies = array(), $nbrDup = array())
             foreach ($row as $key2 => $value2) {
                 $key2 == "dep_name" ? ($dep_name = $value2 = $value2 . "_" . $i) : null;
                 $val
-                    ? $val .= ($value2 != null ? (", '" . $value2 . "'") : ", NULL")
-                    : $val .= ($value2 != null ? ("'" . $value2 . "'") : "NULL");
+                    ? $val .= ($value2 != null ? (", '" . $pearDB->escape($value2) . "'") : ", NULL")
+                    : $val .= ($value2 != null ? ("'" . $pearDB->escape($value2) . "'") : "NULL");
                 if ($key2 != "dep_id") {
                     $fields[$key2] = $value2;
                 }
